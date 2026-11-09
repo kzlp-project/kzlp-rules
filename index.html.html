@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KZLP 5X5 — Правила проекта</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800&display=swap');
+
+:root{
+  --bg:#050506;
+  --panel:#0d0d0f;
+  --panel2:#121214;
+  --red:#b71922;
+  --red2:#e52a35;
+  --muted:#8b8b91;
+  --line:rgba(255,255,255,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(900px 500px at 82% 12%,rgba(160,0,15,.22),transparent 65%),
+    radial-gradient(700px 500px at 8% 55%,rgba(100,0,10,.12),transparent 65%),
+    #050506;
+  color:#f4f4f5;
+  font-family:Inter,Arial,sans-serif;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;
+  background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);
+  background-size:42px 42px;
+}
+a{text-decoration:none;color:inherit}
+
+header{
+  height:76px;position:fixed;z-index:50;left:0;right:0;top:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;background:rgba(5,5,6,.88);
+  border-bottom:1px solid rgba(190,20,30,.22);backdrop-filter:blur(18px);
+}
+.logo{display:flex;align-items:center;gap:12px;font-family:Orbitron;font-weight:800}
+.logo-mark{
+  width:40px;height:40px;border-radius:10px;display:grid;place-items:center;
+  background:linear-gradient(145deg,#d61d27,#58070b);
+  box-shadow:0 0 28px rgba(210,20,30,.3)
+}
+.logo span{color:var(--red2)}
+nav{display:flex;gap:5px}
+nav a{padding:11px 14px;border-radius:8px;color:#909095;font-size:12px;font-weight:700;transition:.2s}
+nav a:hover{color:#fff;background:rgba(180,20,30,.1)}
+.discord{
+  padding:11px 17px;border-radius:8px;background:linear-gradient(135deg,#bf1721,#65080d);
+  font-size:12px;font-weight:800;box-shadow:0 0 24px rgba(180,10,20,.22)
+}
+
+.hero{
+  min-height:720px;padding:150px 7.5% 100px;position:relative;overflow:hidden;
+  display:flex;align-items:center;
+}
+.hero:before{
+  content:"";position:absolute;width:720px;height:720px;right:-320px;top:-220px;
+  background:radial-gradient(circle,rgba(190,10,20,.27),transparent 67%);
+}
+.hero:after{
+  content:"";position:absolute;right:7%;bottom:80px;width:330px;height:330px;
+  border:1px solid rgba(190,20,30,.12);border-radius:50%;
+  box-shadow:0 0 100px rgba(150,0,10,.08),inset 0 0 80px rgba(150,0,10,.05);
+}
+.hero-content{max-width:850px;position:relative;z-index:2}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:99px;
+  border:1px solid rgba(220,30,40,.3);background:rgba(130,0,12,.1);
+  color:#e33a43;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase
+}
+.dot{width:7px;height:7px;border-radius:50%;background:#e52a35;box-shadow:0 0 12px #e52a35}
+h1{font-family:Orbitron;font-size:clamp(48px,8vw,92px);line-height:.92;letter-spacing:-4px;margin:27px 0}
+h1 span{color:var(--red2);text-shadow:0 0 50px rgba(210,0,15,.3)}
+.hero-text{max-width:680px;color:#8d8d93;font-size:15px;line-height:1.85}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{min-height:48px;padding:0 22px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;transition:.2s}
+.btn-red{background:linear-gradient(135deg,#c11923,#65080d);box-shadow:0 0 30px rgba(190,10,20,.24)}
+.btn-red:hover{transform:translateY(-2px);box-shadow:0 0 42px rgba(210,10,20,.38)}
+.btn-dark{border:1px solid #29292d;background:rgba(255,255,255,.025);color:#aaa}
+.btn-dark:hover{border-color:#781019;color:#fff}
+
+.quick{
+  position:absolute;right:7%;bottom:95px;z-index:3;width:310px;padding:18px;
+  border:1px solid rgba(200,20,30,.22);border-radius:14px;background:rgba(10,10,11,.78);
+  backdrop-filter:blur(15px);box-shadow:0 20px 60px rgba(0,0,0,.35)
+}
+.quick-title{font-family:Orbitron;font-size:11px;color:#ddd;margin-bottom:15px}
+.quick-row{display:flex;justify-content:space-between;padding:11px 0;border-top:1px solid #202024;color:#777;font-size:11px}
+.quick-row b{color:#dfe0e2}
+
+.stats{max-width:1250px;margin:-38px auto 75px;padding:0 24px;position:relative;z-index:5}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden;border:1px solid rgba(190,20,30,.2);border-radius:14px;background:#0b0b0c;box-shadow:0 25px 80px rgba(0,0,0,.35)}
+.stat{padding:25px;border-right:1px solid #1e1e21}
+.stat:last-child{border:0}
+.stat-num{font-family:Orbitron;color:#e12630;font-size:24px}
+.stat-label{margin-top:7px;color:#6e6e74;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+
+.container{max-width:1250px;margin:auto;padding:0 24px 100px}
+.section{scroll-margin-top:105px;margin-bottom:72px}
+.eyebrow{font-family:Orbitron;color:#d8222b;font-size:10px;letter-spacing:2px}
+.section h2{font-family:Orbitron;font-size:29px;margin-top:8px}
+.section-desc{color:#777;font-size:12px;margin-top:10px}
+
+.search{position:relative;margin-bottom:30px}
+.search input{
+  width:100%;height:53px;padding:0 20px 0 48px;outline:none;color:#fff;
+  background:#0c0c0e;border:1px solid #222227;border-radius:9px
+}
+.search input:focus{border-color:#83131b;box-shadow:0 0 25px rgba(170,10,20,.1)}
+.search-icon{position:absolute;left:18px;top:14px;color:#666;font-size:20px}
+
+.warning{
+  display:flex;gap:15px;padding:19px;margin:0 0 20px;border-radius:12px;
+  border:1px solid rgba(190,20,30,.27);
+  background:linear-gradient(90deg,rgba(130,0,12,.13),rgba(15,15,16,.65))
+}
+.warning h3{font-size:12px;color:#ed333b;margin-bottom:6px}
+.warning p{font-size:11px;line-height:1.7;color:#85858a}
+
+.card{
+  background:linear-gradient(145deg,#111113,#0a0a0b);
+  border:1px solid #202024;border-radius:12px;margin-bottom:10px;overflow:hidden;transition:.25s
+}
+.card:hover{border-color:rgba(180,20,30,.4);box-shadow:0 15px 45px rgba(100,0,10,.07)}
+.card-head{min-height:76px;padding:17px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.card-left{display:flex;align-items:center;gap:14px}
+.num{
+  min-width:39px;height:39px;border-radius:8px;display:grid;place-items:center;
+  color:#df252e;background:rgba(150,10,20,.09);border:1px solid rgba(190,20,30,.2);
+  font-family:Orbitron;font-size:9px;font-weight:800
+}
+.title{font-size:12px;font-weight:800}
+.desc{font-size:10px;color:#6d6d73;margin-top:4px}
+.arrow{color:#666;font-size:18px;transition:.25s}
+.card.open .arrow{transform:rotate(180deg);color:#e12730}
+.card-body{display:none;padding:0 24px 22px 73px;color:#999;font-size:12px;line-height:1.85}
+.card.open .card-body{display:block}
+.punish{margin-top:13px;padding:11px 14px;border-left:3px solid #c51b24;background:rgba(120,0,10,.08);font-size:10px;color:#aaa}
+.punish b{color:#e22a33}
+
+.table-wrap{overflow:auto;border:1px solid #202024;border-radius:12px;background:#0c0c0e}
+table{width:100%;min-width:600px;border-collapse:collapse}
+th{padding:14px 17px;text-align:left;background:#16090a;color:#d9242d;font-size:9px;letter-spacing:1px;text-transform:uppercase}
+td{padding:13px 17px;border-top:1px solid #1d1d20;color:#96969b;font-size:11px}
+tr:hover td{background:rgba(130,0,10,.05);color:#ddd}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tile{
+  min-height:170px;padding:22px;border:1px solid #202024;border-radius:12px;
+  background:linear-gradient(145deg,#111113,#0a0a0b);transition:.25s
+}
+.tile:hover{transform:translateY(-3px);border-color:rgba(180,20,30,.4);box-shadow:0 18px 45px rgba(100,0,10,.08)}
+.icon{
+  width:42px;height:42px;display:grid;place-items:center;border-radius:10px;
+  background:rgba(150,10,20,.09);border:1px solid rgba(180,20,30,.18);font-size:17px;margin-bottom:17px
+}
+.tile h3{font-size:12px;margin-bottom:7px}
+.tile p{font-size:10px;line-height:1.75;color:#777}
+
+.price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.price{
+  padding:27px;border-radius:13px;border:1px solid #242428;background:linear-gradient(145deg,#121214,#0b0b0c)
+}
+.price h3{font-family:Orbitron;font-size:12px}
+.amount{font-family:Orbitron;font-size:30px;color:#e1252e;margin:12px 0 7px}
+.price p{color:#777;font-size:10px;line-height:1.75}
+
+footer{border-top:1px solid #19191c;background:#050506;text-align:center;padding:45px 20px}
+.footer-logo{font-family:Orbitron;font-size:19px}
+.footer-logo span{color:#e0252e}
+footer p{margin-top:10px;color:#555;font-size:10px;line-height:1.8}
+
+@media(max-width:900px){
+  header{padding:0 20px}
+  nav{display:none}
+  .hero{padding:125px 25px 210px}
+  .quick{right:25px;bottom:55px;width:290px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  header{height:65px}
+  .discord{display:none}
+  .hero{min-height:650px;padding:105px 20px 210px}
+  h1{font-size:43px;letter-spacing:-2px}
+  .hero-text{font-size:12px}
+  .actions{flex-direction:column}
+  .btn{width:100%}
+  .quick{left:20px;right:20px;bottom:40px;width:auto}
+  .stats{margin-top:-20px}
+  .stat{padding:18px 14px}
+  .stat-num{font-size:18px}
+  .container{padding:0 17px 80px}
+  .section h2{font-size:23px}
+  .grid,.price-grid{grid-template-columns:1fr}
+  .card-body{padding:0 17px 20px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" href="#">
+    <div class="logo-mark">K</div>
+    <div>KZLP <span>5X5</span></div>
+  </a>
+
+  <nav>
+    <a href="#matches">Матчи</a>
+    <a href="#public">Паблики</a>
+    <a href="#discord">Discord</a>
+    <a href="#appeal">Апелляции</a>
+  </nav>
+
+  <a class="discord" href="#discord">Войти в Discord</a>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="badge"><span class="dot"></span> Официальные правила KZLP 5X5</div>
+
+    <h1>ПРАВИЛА<br><span>ПРОЕКТА</span></h1>
+
+    <p class="hero-text">
+      Все основные правила KZLP 5X5 собраны в одном месте:
+      матчей, пабликов, Discord, жалоб, апелляций и системы наказаний.
+      Перед началом игры обязательно ознакомьтесь с правилами.
+    </p>
+
+    <div class="actions">
+      <a class="btn btn-red" href="#matches">ЧИТАТЬ ПРАВИЛА</a>
+      <a class="btn btn-dark" href="#appeal">ЖАЛОБЫ И АПЕЛЛЯЦИИ</a>
+    </div>
+  </div>
+
+  <div class="quick">
+    <div class="quick-title">KZLP 5X5 / RULES CENTER</div>
+    <div class="quick-row"><span>Главное правило</span><b>Честная игра</b></div>
+    <div class="quick-row"><span>Формат</span><b>5X5</b></div>
+    <div class="quick-row"><span>Контроль</span><b>24 / 7</b></div>
+    <div class="quick-row"><span>Версия</span><b>2026</b></div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stats-grid">
+    <div class="stat"><div class="stat-num">08</div><div class="stat-label">Разделов</div></div>
+    <div class="stat"><div class="stat-num">40+</div><div class="stat-label">Пунктов</div></div>
+    <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Контроль</div></div>
+    <div class="stat"><div class="stat-num">5X5</div><div class="stat-label">Формат проекта</div></div>
+  </div>
+</div>
+
+<main class="container">
+
+<div class="search">
+  <span class="search-icon">⌕</span>
+  <input id="search" type="text" placeholder="Поиск по правилам...">
+</div>
+
+<section class="section" id="matches">
+  <div class="eyebrow">01 / MATCH RULES</div>
+  <h2>Правила матчей</h2>
+  <p class="section-desc">Основные требования для всех участников матчей KZLP 5X5.</p>
+
+  <div class="warning">
+    <div>⚠️</div>
+    <div>
+      <h3>Важное предупреждение</h3>
+      <p>Незнание правил не освобождает от ответственности. Администрация рассматривает нарушения на основании доказательств, демо, скриншотов, записей и логов.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><div class="card-left"><div class="num">1.1</div><div><div class="title">Незнание правил</div><div class="desc">Незнание правил не освобождает от ответственности.</div></div></div><div class="arrow">⌄</div></div>
+    <div class="card-body">Каждый игрок обязан ознакомиться с действующими правилами проекта.<div class="punish"><b>Ответственность:</b> применяется согласно соответствующему пункту правил.</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><div class="card-left"><div class="num">1.2</div><div><div class="title">Ответственность за аккаунт</div><div class="desc">Игрок отвечает за действия своего аккаунта.</div></div></div><div class="arrow">⌄</div></div>
+    <div class="card-body">Каждый игрок несёт ответственность за действия, совершённые с его аккаунта.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><div class="card-left"><div class="num">1.3</div><div><div class="title">Доказательства</div><div class="desc">Демо, скриншоты, записи и логи.</div></div></div><div class="arrow">⌄</div></div>
+    <div class="card-body">Администрация рассматривает нарушения на основании доступных доказательств: демо, скриншотов, видеозаписей, логов сервера и других материалов.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><div class="card-left"><div class="num">1.4</div><div><div class="title">Повторные нарушения</div><div class="desc">За повторные нарушения наказание может быть увеличено.</div></div></div><div class="arrow">⌄</div></div>
+    <div class="card-body">При повторных нарушениях администрация вправе увеличить срок наказания с учётом истории игрока, тяжести нарушения и обстоятельств ситуации.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><div class="card-left"><div class="num">1.6</div><div><div class="title">Выход из голосового канала</div><div class="desc">Нельзя покидать Discord Voice во время игры.</div></div></div><div class="arrow">⌄</div></div>
+    <div class="card-body">Во время игры запрещено покидать голосовой канал Discord до полного завершения игрового процесса без уважительной причины и разрешения администрации.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><div class="card-left"><div class="num">1.7</div><div><div class="title">Кастомная игра</div><div class="desc">Закрытое лобби.</div></div></div><div class="arrow">⌄</div></div>
+    <div class="card-body">В кастомных играх стандартные правила матчей не применяются. При нарушении или неподобающем поведении игрок может подать жалобу через тикет.</div>
+  </div>
+
+  <div style="margin-top:48px">
+    <div class="eyebrow">02 / DODGE • LEAVE • AFK</div>
+    <h2>Система Dodge / Leave / AFK</h2>
+    <p class="section-desc">Нарушения учитываются совместно. Счётчик сбрасывается после одного месяца без подобных нарушений.</p>
+  </div>
+
+  <div class="table-wrap" style="margin-top:20px">
+    <table>
+      <thead><tr><th>Нарушение</th><th>Наказание</th></tr></thead>
+      <tbody>
+        <tr><td>1-й раз</td><td>30 минут</td></tr>
+        <tr><td>2-й раз</td><td>1 час</td></tr>
+        <tr><td>3-й раз</td><td>3 часа</td></tr>
+        <tr><td>4-й раз</td><td>6 часов</td></tr>
+        <tr><td>5-й раз</td><td>12 часов</td></tr>
+        <tr><td>6-й раз</td><td>1 день</td></tr>
+        <tr><td>7-й раз</td><td>3 дня</td></tr>
+        <tr><td>8-й раз</td><td>7 дней</td></tr>
+        <tr><td>9-й раз</td><td>14 дней</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:22px">
+    <div class="card">
+      <div class="card-head"><div class="card-left"><div class="num">2.1</div><div><div class="title">Dodge</div><div class="desc">Игрок не подключился к матчу.</div></div></div><div class="arrow">⌄</div></div>
+      <div class="card-body">Игрок не заходит на матч в течение 5 минут после начала или не подключается к игре.<div class="punish"><b>Наказание:</b> применяется общая система Dodge / Leave / AFK.</div></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-left"><div class="num">2.2</div><div><div class="title">Leave</div><div class="desc">Выход из матча до завершения.</div></div></div><div class="arrow">⌄</div></div>
+      <div class="card-body">Игрок покидает матч до завершения без уважительной причины.<div class="punish"><b>Наказание:</b> применяется общая система Dodge / Leave / AFK.</div></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-left"><div class="num">2.3</div><div><div class="title">AFK</div><div class="desc">Отсутствие или бездействие во время матча.</div></div></div><div class="arrow">⌄</div></div>
+      <div class="card-body">Игрок отсутствует или бездействует во время матча более одного раунда без уважительной причины.<div class="punish"><b>Наказание:</b> применяется общая система Dodge / Leave / AFK.</div></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-left"><div class="num">2.6</div><div><div class="title">Саботаж команды</div><div class="desc">Намеренный вред собственной команде.</div></div></div><div class="arrow">⌄</div></div>
+      <div class="card-body">Намеренный урон союзникам, ослепление своих, блокировка проходов или передача противнику информации о команде.<div class="punish"><b>Наказание:</b> предупреждение или бан 6 часов; повторно — 24 часа / 3 дня; тяжёлые повторные нарушения — до 7 дней.</div></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-left"><div class="num">2.10</div><div><div class="title">Использование багов</div><div class="desc">Намеренное получение преимущества через ошибки игры.</div></div></div><div class="arrow">⌄</div></div>
+      <div class="card-body">Намеренное применение ошибок игры или сервиса для получения преимущества.<div class="punish"><b>Наказание:</b> бан от 7 до 30 дней; при серьёзном или повторном злоупотреблении — перманентный бан.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">03 / FAIR PLAY</div>
+  <h2>Честная игра и аккаунты</h2>
+  <p class="section-desc">Нарушения, связанные с читами, аккаунтами и нечестным преимуществом.</p>
+
+  <div class="grid" style="margin-top:22px">
+    <div class="tile"><div class="icon">🛡️</div><h3>Читы и запрещённые программы</h3><p>Использование программ, скриптов или автоматизации для получения нечестного преимущества.</p></div>
+    <div class="tile"><div class="icon">🔴</div><h3>Роль «Подозрительный»</h3><p>Игроки с этой ролью обязаны играть с включённым FACEIT Anti-Cheat и необходимыми средствами защиты.</p></div>
+    <div class="tile"><div class="icon">🔎</div><h3>Проверка программ</h3><p>При обоснованных подозрениях администрация может запросить проверку. Отказ — перманентный бан.</p></div>
+    <div class="tile"><div class="icon">👥</div><h3>Мультиаккаунты</h3><p>Запрещено использование нескольких аккаунтов для обхода ограничений, манипуляций рейтингом или получения преимущества.</p></div>
+    <div class="tile"><div class="icon">🚫</div><h3>Обход наказания</h3><p>Использование другого аккаунта для обхода действующего бана запрещено.</p></div>
+    <div class="tile"><div class="icon">📈</div><h3>Договорные матчи</h3><p>Искусственное повышение рейтинга, намеренный слив матчей и сговор ради результата запрещены.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">04 / COMMUNICATION</div>
+  <h2>Общение и поведение</h2>
+
+  <div class="grid" style="margin-top:22px">
+    <div class="tile"><div class="icon">💬</div><h3>Оскорбления и токсичность</h3><p>Унижение, грубые оскорбления и постоянные провокации запрещены.</p></div>
+    <div class="tile"><div class="icon">⚠️</div><h3>Дискриминация</h3><p>Запрещены оскорбления по национальности, расе, религии и другим личным признакам.</p></div>
+    <div class="tile"><div class="icon">🚨</div><h3>Угрозы и доксинг</h3><p>Запрещены угрозы реальному человеку и публикация личных данных без разрешения.</p></div>
+    <div class="tile"><div class="icon">📢</div><h3>Флуд и спам</h3><p>Запрещены многократные сообщения, бессмысленные символы и намеренное засорение чата.</p></div>
+    <div class="tile"><div class="icon">🎫</div><h3>Ложные жалобы</h3><p>Запрещены заведомо ложные жалобы и поддельные доказательства.</p></div>
+    <div class="tile"><div class="icon">🚫</div><h3>Мошенничество и фишинг</h3><p>Обман игроков, кража аккаунтов, вредоносные ссылки и файлы запрещены.</p></div>
+  </div>
+</section>
+
+<section class="section" id="public">
+  <div class="eyebrow">05 / PUBLIC</div>
+  <h2>Правила пабликов</h2>
+  <p class="section-desc">Правила поведения на публичных серверах проекта.</p>
+
+  <div class="grid" style="margin-top:22px">
+    <div class="tile"><div class="icon">🎮</div><h3>Честная игра</h3><p>Запрещены читы, сторонние программы, скрипты и другие средства нечестного преимущества.</p></div>
+    <div class="tile"><div class="icon">💀</div><h3>Тимкилл и саботаж</h3><p>Запрещены намеренный урон союзникам, блокировка проходов и умышленный срыв игры.</p></div>
+    <div class="tile"><div class="icon">😴</div><h3>AFK</h3><p>Нельзя намеренно отсутствовать или бездействовать во время игрового процесса.</p></div>
+    <div class="tile"><div class="icon">🚪</div><h3>Leave</h3><p>Беспричинный выход из матча до его завершения может привести к наказанию.</p></div>
+    <div class="tile"><div class="icon">📈</div><h3>Бустинг</h3><p>Запрещены договорные матчи, намеренный слив и искусственное изменение результатов.</p></div>
+    <div class="tile"><div class="icon">🐛</div><h3>Использование багов</h3><p>Намеренное использование ошибок игры для получения преимущества запрещено.</p></div>
+    <div class="tile"><div class="icon">💬</div><h3>Общение</h3><p>Запрещены оскорбления, угрозы, дискриминация, провокации и токсичность.</p></div>
+    <div class="tile"><div class="icon">📢</div><h3>Реклама</h3><p>Реклама сторонних проектов и сервисов запрещена без разрешения администрации.</p></div>
+    <div class="tile"><div class="icon">🔐</div><h3>Аккаунты</h3><p>Запрещены передача аккаунтов, мультиаккаунты и обход блокировок.</p></div>
+  </div>
+</section>
+
+<section class="section" id="discord">
+  <div class="eyebrow">06 / DISCORD</div>
+  <h2>Правила Discord</h2>
+  <p class="section-desc">Правила распространяются на текстовые и голосовые каналы, никнеймы, аватары, статусы, профили и связанные с проектом обращения.</p>
+
+  <div style="margin-top:22px">
+    <div class="card"><div class="card-head"><div class="card-left"><div class="num">D1</div><div><div class="title">Оскорбления и негативные высказывания</div><div class="desc">Уважайте участников и их близких.</div></div></div><div class="arrow">⌄</div></div><div class="card-body">Запрещены оскорбления участников, их родных и близких, а также целенаправленные провокации.<div class="punish"><b>Наказание:</b> тайм-аут 1 → 3 → 6 → 12 часов.</div></div></div>
+    <div class="card"><div class="card-head"><div class="card-left"><div class="num">D2</div><div><div class="title">Спам и флуд</div><div class="desc">Не засоряйте каналы.</div></div></div><div class="arrow">⌄</div></div><div class="card-body">Запрещены многократные сообщения, бессмысленный флуд и массовые упоминания игроков и ролей.<div class="punish"><b>Наказание:</b> тайм-аут 1 → 3 → 6 → 12 часов.</div></div></div>
+    <div class="card"><div class="card-head"><div class="card-left"><div class="num">D3</div><div><div class="title">Имитация администрации</div><div class="desc">Нельзя выдавать себя за администратора.</div></div></div><div class="arrow">⌄</div></div><div class="card-body">Запрещено использовать никнейм, аватар или оформление, создающие впечатление, что игрок является представителем администрации.<div class="punish"><b>Наказание:</b> тайм-аут до 6 часов.</div></div></div>
+    <div class="card"><div class="card-head"><div class="card-left"><div class="num">D4</div><div><div class="title">Запрещённые вещества</div><div class="desc">Реклама, продажа и распространение.</div></div></div><div class="arrow">⌄</div></div><div class="card-body">Публикация, реклама и продажа запрещённых веществ запрещены.<div class="punish"><b>Наказание:</b> бан навсегда.</div></div></div>
+    <div class="card"><div class="card-head"><div class="card-left"><div class="num">D5</div><div><div class="title">Шокирующий контент</div><div class="desc">Насилие, расчленение, пытки и графические материалы.</div></div></div><div class="arrow">⌄</div></div><div class="card-body">Запрещено публиковать контент, содержащий сцены насилия, расчленения, пыток и другие шокирующие материалы.<div class="punish"><b>Наказание:</b> тайм-аут до 3 дней.</div></div></div>
+    <div class="card"><div class="card-head"><div class="card-left"><div class="num">D6</div><div><div class="title">Реклама без разрешения</div><div class="desc">Сторонние проекты и материалы.</div></div></div><div class="arrow">⌄</div></div><div class="card-body">Реклама и распространение материалов без разрешения администрации запрещены.<div class="punish"><b>Наказание:</b> тайм-аут до 1 дня; возможен кик или бан.</div></div></div>
+    <div class="card"><div class="card-head"><div class="card-left"><div class="num">D7</div><div><div class="title">Приватная информация</div><div class="desc">Не публикуйте содержимое приватных каналов.</div></div></div><div class="arrow">⌄</div></div><div class="card-body">Запрещено разглашать сообщения и материалы из приватных каналов в публичных каналах без разрешения.<div class="punish"><b>Наказание:</b> тайм-аут до 3 часов.</div></div></div>
+  </div>
+</section>
+
+<section class="section" id="appeal">
+  <div class="eyebrow">07 / APPEALS</div>
+  <h2>Жалобы и апелляции</h2>
+  <p class="section-desc">Все обращения рассматриваются через официальный тикет.</p>
+
+  <div class="grid" style="margin-top:22px">
+    <div class="tile"><div class="icon">🎫</div><h3>Подача жалобы</h3><p>Жалоба подаётся через официальный тикет с максимально полными доказательствами.</p></div>
+    <div class="tile"><div class="icon">📹</div><h3>Доказательства</h3><p>Используйте видеозаписи, скриншоты, демо, логи и другие материалы.</p></div>
+    <div class="tile"><div class="icon">⚖️</div><h3>Апелляция</h3><p>Игрок имеет право подать одну апелляцию на выданное наказание.</p></div>
+    <div class="tile"><div class="icon">🔒</div><h3>Конфиденциальность</h3><p>Администрация по возможности не раскрывает личность автора жалобы.</p></div>
+  </div>
+
+  <div class="warning" style="margin-top:20px">
+    <div>📌</div>
+    <div><h3>Срок подачи жалобы</h3><p>Жалоба на матч должна быть подана в течение 3 дней после его завершения.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">08 / РАЗБАН</div>
+  <h2>Платный разбан</h2>
+  <p class="section-desc">Условия отображены в соответствии с предоставленными правилами проекта.</p>
+
+  <div class="price-grid" style="margin-top:22px">
+    <div class="price">
+      <h3>Обычный разбан</h3>
+      <div class="amount">200 ₸</div>
+      <p>Менее 7 часов — 200 ₸ за час.<br><br>Более 8 часов — 100 ₸ за час.</p>
+    </div>
+    <div class="price">
+      <h3>Перманентная блокировка</h3>
+      <div class="amount">2500 ₸</div>
+      <p>Стоимость платного разбана для игроков с перманентной блокировкой.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">FINAL / KZLP 5X5</div>
+  <h2>Заключительные положения</h2>
+
+  <div class="warning" style="margin-top:20px">
+    <div>🛡️</div>
+    <div>
+      <h3>Принцип проекта</h3>
+      <p>Администрация KZLP 5X5 вправе рассматривать ситуации, прямо не описанные в правилах, исходя из принципов честной игры, безопасности и комфорта участников. Изменения правил вступают в силу после публикации.</p>
+      <br>
+      <p><b style="color:#ddd">Цель проекта — честные матчи, уважительное общение и комфортная игра для всех участников.</b></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-logo">KZLP <span>5X5</span></div>
+  <p>Официальные правила проекта KZLP 5X5.<br>Незнание правил не освобождает от ответственности.</p>
+  <p>© 2026 KZLP 5X5. Все права защищены.</p>
+</footer>
+
+<script>
+document.querySelectorAll('.card-head').forEach(head=>{
+  head.addEventListener('click',()=>head.parentElement.classList.toggle('open'));
+});
+
+const search=document.getElementById('search');
+search.addEventListener('input',()=>{
+  const q=search.value.toLowerCase().trim();
+  document.querySelectorAll('.card,.tile').forEach(el=>{
+    el.style.display = !q || el.innerText.toLowerCase().includes(q) ? '' : 'none';
+  });
+});
+</script>
+
+</body>
+</html>
